@@ -1,0 +1,193 @@
+import 'package:flutter/material.dart';  
+import 'package:device_preview/device_preview.dart';
+
+// Firstly install this package.
+// flutter pub add device_preview
+void main() {
+  runApp(
+    DevicePreview(
+    enabled: true,
+    builder: (context) => MaterialApp(
+      useInheritedMediaQuery: true,
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text("My App"),
+          backgroundColor: Colors.greenAccent,
+          centerTitle: true,
+          elevation: 30.0,
+          toolbarOpacity: 1,
+          actions: <Widget>[
+            IconButton(onPressed: () {
+            }, icon: const Icon(Icons.arrow_forward),
+          ),
+          IconButton(onPressed: (){
+          }, icon: const Icon(Icons.arrow_back)
+          )
+          ],
+          ),
+        body: Column(
+          children: [
+            Expanded(
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    color: Colors.amberAccent,
+                    child: Text(
+                      "Khan",
+                      textAlign: TextAlign.right,
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                    )
+                  ),
+                  )
+                )
+              ),
+            
+            Expanded(
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    color: Colors.amberAccent,
+                    child: Text(
+                      "Suhail",
+                      textAlign: TextAlign.right,
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                    )
+                  ),
+                  )
+                )
+              ),
+            
+            ],
+          ),
+        ),
+    )
+  ));
+}
+
+
+
+
+
+
+//////////////// lAYOUT BUILDER
+
+import 'package:flutter/material.dart';
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  static const String _title = "Flutter Code Sample";
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title : _title,
+      home: MyStatelessWidget()
+    );
+  }
+}
+
+class MyStatelessWidget extends StatelessWidget {
+  const MyStatelessWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('LayoutBuilder Example')),
+      body: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+        if(constraints.maxWidth > 600) {
+          return _buildWideContainers();
+        }else {
+          return _buildNormalContainer();
+        }
+      }
+      ),
+    );
+  }
+
+  Widget _buildNormalContainer() {
+    return Center(
+      child: Container(
+        height: 100.0,
+        width: 100.0,
+        color: Colors.red,
+        )
+      );
+  }
+
+  Widget _buildWideContainers() {
+    return Center(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          Container(
+            height: 100.0,
+            width: 100.0,
+            color: Colors.red,
+          ),
+          Container(
+            height: 100.0,
+            width: 100.0,
+            color: Colors.yellow,
+            )
+        ],
+      ),
+    );
+  }
+}
+
+
+
+/////   Media Query
+
+
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text("Hello"),
+          backgroundColor: Colors.green,
+        ),
+        body: MediaQueryExample(),
+      ),
+    );
+  }
+}
+
+class MediaQueryExample extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
+
+    double height = mediaQueryData.size.height;
+    double width = mediaQueryData.size.width;
+
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.green,
+      ),
+      body: Container(
+        color: Colors.indigo,
+        height: height / 2,
+        width: width / 2,
+      ),
+    );
+  }
+}
